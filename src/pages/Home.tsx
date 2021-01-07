@@ -7,7 +7,7 @@ export const Home: React.FC = () => {
       <div className="panel">
         <div className="panel-body">
           <div className="col-md-6 col-sm-12">
-            <h3 className="animated fadeInLeft">Customer Service</h3>
+            <h3 className="animated fadeInLeft">Customer Service OK!</h3>
             <p className="animated fadeInDown"><span className="fa  fa-map-marker"></span> Batavia,Indonesia</p>
 
             <ul className="nav navbar-nav">
