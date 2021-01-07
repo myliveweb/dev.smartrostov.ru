@@ -12,34 +12,34 @@ export const LeftMenu: React.FC = () => {
             <p className="animated fadeInRight">Sat,October 1st 2029</p>
           </li>
           <li className="active ripple">
-            <a className="tree-toggle nav-header"><span className="fa-home fa"></span> Dashboard
+            <NavLink to="#" className="tree-toggle nav-header"><span className="fa-home fa"></span> Dashboard
               <span className="fa-angle-right fa right-arrow text-right"></span>
-            </a>
+            </NavLink>
             <ul className="nav nav-list tree">
-              <li><a href="dashboard-v1.html">Dashboard v.1</a></li>
-              <li><a href="dashboard-v2.html">Dashboard v.2</a></li>
+              <li><NavLink to="#" href="dashboard-v1.html">Dashboard v.1</NavLink></li>
+              <li><NavLink to="#" href="dashboard-v2.html">Dashboard v.2</NavLink></li>
             </ul>
           </li>
           <li className="ripple">
-            <a className="tree-toggle nav-header">
+            <NavLink to="#" className="tree-toggle nav-header">
               <span className="fa-diamond fa"></span> Layout
               <span className="fa-angle-right fa right-arrow text-right"></span>
-            </a>
+            </NavLink>
             <ul className="nav nav-list tree">
-              <li><a href="topnav.html">Top Navigation</a></li>
-              <li><a href="boxed.html">Boxed</a></li>
+              <li><NavLink to="#" href="topnav.html">Top Navigation</NavLink></li>
+              <li><NavLink to="#" href="boxed.html">Boxed</NavLink></li>
             </ul>
           </li>
           <li className="ripple">
-            <a className="tree-toggle nav-header">
+            <NavLink to="#" className="tree-toggle nav-header">
               <span className="fa-area-chart fa"></span> Charts
               <span className="fa-angle-right fa right-arrow text-right"></span>
-            </a>
+            </NavLink>
             <ul className="nav nav-list tree">
-              <li><a href="chartjs.html">ChartJs</a></li>
-              <li><a href="morris.html">Morris</a></li>
-              <li><a href="flot.html">Flot</a></li>
-              <li><a href="sparkline.html">SparkLine</a></li>
+              <li><NavLink to="#" href="chartjs.html">ChartJs</NavLink></li>
+              <li><NavLink to="#" href="morris.html">Morris</NavLink></li>
+              <li><NavLink to="#" href="flot.html">Flot</NavLink></li>
+              <li><NavLink to="#" href="sparkline.html">SparkLine</NavLink></li>
             </ul>
           </li>
         </ul>
