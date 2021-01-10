@@ -12,7 +12,7 @@ export const Navbar: React.FC = () => {
             <span className="bottom"></span>
           </div>
             <NavLink to="/info/" className="navbar-brand">
-              <b>ZAS</b>
+              <b>Hi</b>
             </NavLink>
 
           <ul className="nav navbar-nav search-nav">
