@@ -16,8 +16,8 @@ export const LeftMenu: React.FC = () => {
               <span className="fa-angle-right fa right-arrow text-right"></span>
             </a>
             <ul className="nav nav-list tree">
-              <li><a href="dashboard-v1.html">Dashboard v.001</a></li>
-              <li><a href="dashboard-v2.html">Dashboard v.002</a></li>
+              <li><a href="dashboard-v1.html">Dashboard v.0001</a></li>
+              <li><a href="dashboard-v2.html">Dashboard v.0002</a></li>
             </ul>
           </li>
           <li className="ripple">
