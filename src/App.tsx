@@ -40,7 +40,7 @@ function App() {
           <>
             <CssBaseline />
             <Container maxWidth="lg">
-              <Header title="Мой питомец Test" sections={sections} />
+              <Header title="Мой питомец" sections={sections} />
               <Route path="/" component={Home} exact />
               <Route path="/info" component={Info} />
             </Container>
