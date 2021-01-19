@@ -61,13 +61,13 @@ export const Header: React.FC<HeaderProps> = (props) => {
       </Toolbar>
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {sections.map((section) => (
-          <NavLink
+          <Link
             color="inherit"
-            to={section.url}
+            href={section.url}
             className={classes.toolbarLink}
           >
             {section.title}
-          </NavLink>
+          </Link>
         ))}
       </Toolbar>
     </>
