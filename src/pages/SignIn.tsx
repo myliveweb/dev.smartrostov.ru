@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -97,14 +98,14 @@ export const SignIn: React.FC = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <NavLink to="#">
                 Забыли пароль?
-              </Link>
+              </NavLink>
             </Grid>
             <Grid item>
-              <Link href="/signup" variant="body2">
+              <NavLink to="/signup">
                 {"Нет аккаунта? Зарегистрируйтесь"}
-              </Link>
+              </NavLink>
             </Grid>
           </Grid>
         </form>

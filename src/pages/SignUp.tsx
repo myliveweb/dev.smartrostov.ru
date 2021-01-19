@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -125,9 +126,9 @@ export const SignUp: React.FC = () => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/signin" variant="body2">
+              <NavLink to="/signin">
                 Уже есть аккаунт? Войти
-              </Link>
+              </NavLink>
             </Grid>
           </Grid>
         </form>
