@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -62,10 +62,13 @@ export const Header: React.FC<HeaderProps> = (props) => {
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {sections.map((section) => (
           <Link
-            color="inherit"
-            href={section.url}
-            className={classes.toolbarLink}
-          >
+          color="inherit"
+          noWrap
+          key={section.title}
+          variant="body2"
+          href={section.url}
+          className={classes.toolbarLink}
+        >
             {section.title}
           </Link>
         ))}
