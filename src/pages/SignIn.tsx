@@ -60,7 +60,7 @@ export const SignIn: React.FC = () => {
         <Typography component="h1" variant="h5">
           Вход
         </Typography>
-        <form className={classes.form} noValidate>
+        <form method="POST" className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
