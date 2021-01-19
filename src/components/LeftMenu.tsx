@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { DateTime } from './DateTime'
 
 export const LeftMenu: React.FC = () => {
   return (
@@ -7,10 +8,7 @@ export const LeftMenu: React.FC = () => {
       <div className="sub-left-menu scroll">
         <ul className="nav nav-list">
           <li><div className="left-bg"></div></li>
-          <li className="time">
-            <h1 className="animated fadeInLeft">21:00</h1>
-            <p className="animated fadeInRight">Sat,October 1st 2029</p>
-          </li>
+          <DateTime />
           <li className="active ripple">
             <NavLink to="#" className="tree-toggle nav-header">
               <span className="fa-home fa"></span> Dashboard
