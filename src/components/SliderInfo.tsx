@@ -18,22 +18,22 @@ export default function SliderInfo() {
     <div style={style}>
       <Slider {...settings}>
         <div>
-          <img src="https://picsum.photos/640/480?random=1" alt="" />
+          <img src="/asset/img/slider/1.jpg" alt="" />
         </div>
         <div>
-          <img src="https://picsum.photos/640/480?random=2" alt="" />
+          <img src="/asset/img/slider/2.jpg" alt="" />
         </div>
         <div>
-          <img src="https://picsum.photos/640/480?random=3" alt="" />
+          <img src="/asset/img/slider/3.jpg" alt="" />
         </div>
         <div>
-          <img src="https://picsum.photos/640/480?random=4" alt="" />
+          <img src="/asset/img/slider/4.jpg" alt="" />
         </div>
         <div>
-          <img src="https://picsum.photos/640/480?random=5" alt="" />
+          <img src="/asset/img/slider/5.jpg" alt="" />
         </div>
         <div>
-          <img src="https://picsum.photos/640/480?random=6" alt="" />
+          <img src="/asset/img/slider/6.jpg" alt="" />
         </div>
       </Slider>
     </div>
