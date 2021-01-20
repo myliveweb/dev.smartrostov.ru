@@ -5,7 +5,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
-import { Home } from './pages/Home'
+import Home from './pages/Home'
+import Card from './pages/Card'
+import { About } from './pages/About'
 import { Info } from './pages/Info'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
@@ -17,16 +19,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const sections = [
-  { title: 'Home', url: '/' },
-  { title: 'Info', url: '/info' },
-  { title: 'SignIn', url: '/signin' },
-  { title: 'SignUp', url: '/signup' },
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
+  { title: 'Главная', url: '/' },
+  { title: 'Категории', url: '/catalog' },
+  { title: 'Собрать свою', url: '/create' },
+  { title: 'Галлерея', url: '/gallery' },
+  { title: 'Как это работает', url: '/info' },
+  { title: 'О нас', url: '/about' },
 ];
 
 function App() {
@@ -40,9 +38,11 @@ function App() {
           <>
             <CssBaseline />
             <Container maxWidth="lg">
-              <Header title="Мой питомец" sections={sections} />
+              <Header title="Давай меняться" sections={sections} />
               <Route path="/" component={Home} exact />
+              <Route path="/card/:id" component={Card} />
               <Route path="/info" component={Info} />
+              <Route path="/about" component={About} />
             </Container>
             <Footer />
           </>

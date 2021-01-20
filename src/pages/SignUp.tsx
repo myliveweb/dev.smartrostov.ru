@@ -114,9 +114,9 @@ export const SignUp: React.FC = () => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/signin" variant="body2">
+              <NavLink to="/signin">
                 Уже есть аккаунт? Войти
-              </Link>
+              </NavLink>
             </Grid>
           </Grid>
         </form>

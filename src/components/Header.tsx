@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom'
+import { useHistory, NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import Icon from '@material-ui/core/Icon';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -36,7 +37,6 @@ export const Header: React.FC<HeaderProps> = (props) => {
   const history = useHistory()
   
   const { sections, title } = props;
-  console.log(sections);
 
   return (
     <>
@@ -50,7 +50,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
           noWrap
           className={classes.toolbarTitle}
         >
-          {title}
+          <img src="/asset/img/1.png" alt="" />
         </Typography>
         <IconButton>
           <SearchIcon />
@@ -61,16 +61,14 @@ export const Header: React.FC<HeaderProps> = (props) => {
       </Toolbar>
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {sections.map((section) => (
-          <Link
+          <NavLink
           color="inherit"
-          noWrap
           key={section.title}
-          variant="body2"
-          href={section.url}
+          to={section.url}
           className={classes.toolbarLink}
         >
             {section.title}
-          </Link>
+          </NavLink>
         ))}
       </Toolbar>
     </>

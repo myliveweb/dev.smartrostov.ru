@@ -86,14 +86,14 @@ export const SignIn: React.FC = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <NavLink to="#">
                 Забыли пароль?
-              </Link>
+              </NavLink>
             </Grid>
             <Grid item>
-              <Link href="/signup" variant="body2">
+              <NavLink to="/signup">
                 {"Нет аккаунта? Зарегистрируйтесь"}
-              </Link>
+              </NavLink>
             </Grid>
           </Grid>
         </form>

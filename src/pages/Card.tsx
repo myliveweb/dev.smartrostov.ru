@@ -1,7 +1,4 @@
-import React from 'react';
-import Box from '@material-ui/core/Box';
-import CardItem from '../components/CardItem';
-import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import React from 'react'
 
 const dataItems = [
   { id: 1, shop: 'vliga', name: 'Мороженое Минское Пломбир шоколадный ж15% 400г Россия', date: 'с 8 по 20 января', photo: '/asset/img/1.webp', price: '159,90 ₽', oldPrice: '209,90 ₽' },
@@ -10,19 +7,27 @@ const dataItems = [
   { id: 4, shop: 'dixi', name: 'Мороженое КОРНЕТТО ЮНИКОРН рожок, 73 г', date: 'с 14 по 31 января', photo: '/asset/img/4.webp', price: '49,99 ₽', oldPrice: '79,99 ₽' },
 ]
 
-const Home: React.FC = () => {
-
-  return (
-    <Box my={4} style={{flexGrow: 1}}>
-      <Grid container spacing={3}>
-      {dataItems.map((item) => (
-        <Grid item xs={12} sm={6} md={3} key={item.id}>
-          <CardItem data={item} />
-        </Grid>
-        ))}
-      </Grid>
-    </Box>
-  );
+interface CardProps {
+  match: {params: {
+    id: string
+  }}
 }
 
-export default Home;
+const Card: React.FC<CardProps> = (props) => {
+
+  const id = parseInt(props.match.params.id, 10)
+
+  const [itemCard] = dataItems.filter(card => {
+    return card.id === id;
+  })
+
+  console.log(itemCard)
+
+  return (
+    <div>
+      Card {id}
+    </div>
+  )
+}
+
+export default Card;
