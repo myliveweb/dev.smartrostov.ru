@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme: Theme) =>
     avatar: {
       backgroundColor: red[500],
     },
+    favoriteActive: {
+      color: red[500],
+    },
   }),
 );
 
@@ -59,6 +62,7 @@ const CardItem: React.FC<CardItemProps> = (props) => {
   const history = useHistory()
 
   const [shadow, setShadow] = React.useState(1);
+  const [favorite, setFavorite] = React.useState(false);
 
   const handleMouseEnter = () => {
     setShadow(5)
@@ -66,6 +70,11 @@ const CardItem: React.FC<CardItemProps> = (props) => {
 
   const handleMouseLeave = () => {
     setShadow(1)
+  };
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, idFavorite: number) => {
+    event.stopPropagation()
+    setFavorite(!favorite)
   };
 
   return (
@@ -109,7 +118,7 @@ const CardItem: React.FC<CardItemProps> = (props) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton className={favorite ? classes.favoriteActive : ''} aria-label="add to favorites" onClick={event => handleClick(event, id)}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">

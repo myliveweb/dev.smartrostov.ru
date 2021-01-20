@@ -21,8 +21,6 @@ const Card: React.FC<CardProps> = (props) => {
     return card.id === id;
   })
 
-  console.log(itemCard)
-
   return (
     <div>
       Card {id}

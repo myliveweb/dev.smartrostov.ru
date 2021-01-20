@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
 import CardItem from '../components/CardItem';
-import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid';
 
 const dataItems = [
   { id: 1, shop: 'vliga', name: 'Мороженое Минское Пломбир шоколадный ж15% 400г Россия', date: 'с 8 по 20 января', photo: '/asset/img/1.webp', price: '159,90 ₽', oldPrice: '209,90 ₽' },

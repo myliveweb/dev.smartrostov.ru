@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import { Header } from './components/Header'
@@ -11,12 +10,6 @@ import { About } from './pages/About'
 import { Info } from './pages/Info'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
-
-const useStyles = makeStyles((theme) => ({
-  mainGrid: {
-    marginTop: theme.spacing(3),
-  },
-}));
 
 const sections = [
   { title: 'Главная', url: '/' },
