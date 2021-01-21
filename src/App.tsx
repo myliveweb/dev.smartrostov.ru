@@ -21,6 +21,20 @@ const sections = [
 ];
 
 function App() {
+
+  let init: number[] = []
+
+  const fav = window.localStorage.getItem('favoriteList')
+
+  if(fav)
+    init = JSON.parse(fav)
+
+  const [favoriteList, setFavoriteList] = React.useState(init);
+
+  React.useEffect(() => {
+    window.localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
+  }, [favoriteList]);
+
   return (
     <BrowserRouter>
       <Switch>
@@ -32,7 +46,9 @@ function App() {
             <CssBaseline />
             <Container maxWidth="lg">
               <Header title="Давай меняться" sections={sections} />
-              <Route path="/" component={Home} exact />
+              <Route path="/" exact>
+                <Home favoriteList={favoriteList} setFavoriteList={setFavoriteList} />
+              </Route>
               <Route path="/card/:id" component={Card} />
               <Route path="/info" component={Info} />
               <Route path="/about" component={About} />

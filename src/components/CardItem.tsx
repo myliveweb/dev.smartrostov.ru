@@ -43,6 +43,26 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+/*function useLocalStorageState(key: string, defaultValue: [] = []) {
+
+  let init: [] = defaultValue
+
+  const fav = window.localStorage.getItem(key)
+
+  if(fav)
+    init = JSON.parse(fav)
+
+  const [favoriteList, setFavoriteList] = React.useState(
+    () => init
+  );
+
+  React.useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(favoriteList));
+  }, [favoriteList, key]);
+
+  return [favoriteList, setFavoriteList];
+}*/
+
 interface CardItemProps {
   data: {
     id: number,
@@ -52,17 +72,22 @@ interface CardItemProps {
     photo: string,
     price: string,
     oldPrice: string
+  },
+  favState: {
+    favoriteList: number[],
+    setFavoriteList: (favoriteList: number[]) => void;
   }
 }
 
 const CardItem: React.FC<CardItemProps> = (props) => {
 
-  const {id, shop, name, date, photo, price, oldPrice} = { ...props.data }
+  const {id, name, date, photo, price, oldPrice} = { ...props.data }
+  const {favoriteList, setFavoriteList} = { ...props.favState }
+  
   const classes = useStyles()
   const history = useHistory()
 
   const [shadow, setShadow] = React.useState(1);
-  const [favorite, setFavorite] = React.useState(false);
 
   const handleMouseEnter = () => {
     setShadow(5)
@@ -74,19 +99,24 @@ const CardItem: React.FC<CardItemProps> = (props) => {
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>, idFavorite: number) => {
     event.stopPropagation()
-    setFavorite(!favorite)
+
+    if(!favoriteList.includes(idFavorite)) {
+      setFavoriteList([...favoriteList, idFavorite]);
+    } else {
+      setFavoriteList(favoriteList.filter(item => item !== idFavorite));
+    }
   };
 
   return (
-    <Card 
-      className={classes.root} 
-      style={{ height: '100%', cursor: 'pointer' }} 
-      onMouseEnter={handleMouseEnter} 
-      onMouseLeave={handleMouseLeave} 
+    <Card
+      className={classes.root}
+      style={{ height: '100%', cursor: 'pointer' }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       elevation={shadow}
       onClick={() => history.push(`/card/${id}`)}
       >
-      <CardHeader 
+      <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
             R
@@ -118,7 +148,7 @@ const CardItem: React.FC<CardItemProps> = (props) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton className={favorite ? classes.favoriteActive : ''} aria-label="add to favorites" onClick={event => handleClick(event, id)}>
+        <IconButton className={favoriteList.includes(id) ? classes.favoriteActive : ''} aria-label="add to favorites" onClick={event => handleClick(event, id)}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">

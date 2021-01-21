@@ -34,7 +34,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
   const classes = useStyles();
   const history = useHistory()
   
-  const { sections, title } = props;
+  const { sections } = props;
 
   return (
     <>

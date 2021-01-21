@@ -10,14 +10,21 @@ const dataItems = [
   { id: 4, shop: 'dixi', name: 'Мороженое КОРНЕТТО ЮНИКОРН рожок, 73 г', date: 'с 14 по 31 января', photo: '/asset/img/4.webp', price: '49,99 ₽', oldPrice: '79,99 ₽' },
 ]
 
-const Home: React.FC = () => {
+interface HomeProps {
+  favoriteList: number[],
+  setFavoriteList: (favoriteList: number[]) => void;
+}
+
+const Home: React.FC<HomeProps> = ({favoriteList, setFavoriteList}) => {
+
+  const favState = { favoriteList: favoriteList, setFavoriteList: setFavoriteList }
 
   return (
     <Box my={4} style={{flexGrow: 1}}>
       <Grid container spacing={3}>
       {dataItems.map((item) => (
         <Grid item xs={12} sm={6} md={3} key={item.id}>
-          <CardItem data={item} />
+          <CardItem data={item} favState={favState} />
         </Grid>
         ))}
       </Grid>
