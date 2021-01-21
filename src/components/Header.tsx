@@ -1,12 +1,14 @@
 import React from 'react';
 import { useHistory, NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { Theme, makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
+import Badge from '@material-ui/core/Badge';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -25,16 +27,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const StyledBadge = withStyles((theme: Theme) =>
+  createStyles({
+    badge: {
+      right: -3,
+      top: 1,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
+    },
+  }),
+)(Badge);
+
 interface HeaderProps {
     title: string,
-    sections: {title: string, url: string}[]
+    sections: {title: string, url: string}[],
+    favoriteList: number[],
 }
 
 export const Header: React.FC<HeaderProps> = (props) => {
   const classes = useStyles();
   const history = useHistory()
   
-  const { sections } = props;
+  const { sections, favoriteList } = props;
 
   return (
     <>
@@ -50,6 +64,11 @@ export const Header: React.FC<HeaderProps> = (props) => {
         >
           <img src="/asset/img/1.png" alt="" />
         </Typography>
+        <IconButton aria-label="cart">
+          <StyledBadge badgeContent={favoriteList.length} color="secondary">
+            <FavoriteIcon style={{ color: 'red' }} />
+          </StyledBadge>
+        </IconButton>
         <IconButton>
           <SearchIcon />
         </IconButton>

@@ -55,7 +55,7 @@ function App() {
           <>
             <CssBaseline />
             <Container maxWidth="lg">
-              <Header title="Давай меняться" sections={sections} />
+              <Header title="Давай меняться" sections={sections} favoriteList={favoriteList} />
               <Route path="/" exact>
                 <Home favoriteList={favoriteList} setFavoriteList={setFavoriteList} cardList={cardList} />
               </Route>
