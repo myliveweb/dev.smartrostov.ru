@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import { Header } from './components/Header'
@@ -21,6 +22,15 @@ const sections = [
 ];
 
 function App() {
+
+  const [cardList, setCardList] = React.useState([]);
+
+  React.useEffect(() => {
+    axios.get(`https://api.zapolskiy.moscow/v2/?action=card_list`)
+      .then(res => {
+        setCardList(() => res.data)
+      })
+  }, []);
 
   let init: number[] = []
 
@@ -47,7 +57,7 @@ function App() {
             <Container maxWidth="lg">
               <Header title="Давай меняться" sections={sections} />
               <Route path="/" exact>
-                <Home favoriteList={favoriteList} setFavoriteList={setFavoriteList} />
+                <Home favoriteList={favoriteList} setFavoriteList={setFavoriteList} cardList={cardList} />
               </Route>
               <Route path="/card/:id" component={Card} />
               <Route path="/info" component={Info} />

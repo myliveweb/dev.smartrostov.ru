@@ -42,27 +42,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
-/*function useLocalStorageState(key: string, defaultValue: [] = []) {
-
-  let init: [] = defaultValue
-
-  const fav = window.localStorage.getItem(key)
-
-  if(fav)
-    init = JSON.parse(fav)
-
-  const [favoriteList, setFavoriteList] = React.useState(
-    () => init
-  );
-
-  React.useEffect(() => {
-    window.localStorage.setItem(key, JSON.stringify(favoriteList));
-  }, [favoriteList, key]);
-
-  return [favoriteList, setFavoriteList];
-}*/
-
 interface CardItemProps {
   data: {
     id: number,
