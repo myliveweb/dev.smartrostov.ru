@@ -1,49 +1,36 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-
-export const Home: React.FC = () => {
-  return (
-    <div id="content">
-      <div className="panel">
-        <div className="panel-body">
-          <div className="col-md-6 col-sm-12">
-            <h3 className="animated fadeInLeft">Customer Service OK!</h3>
-            <p className="animated fadeInDown"><span className="fa  fa-map-marker"></span> Batavia,Indonesia</p>
-
-            <ul className="nav navbar-nav">
-                <li><NavLink to="/" >Impedit</NavLink></li>
-                <li><NavLink to="/" className="active">Virtute</NavLink></li>
-                <li><NavLink to="/">Euismod</NavLink></li>
-                <li><NavLink to="/">Explicar</NavLink></li>
-                <li><NavLink to="/">Rebum</NavLink></li>
-            </ul>
-          </div>
-          <div className="col-md-6 col-sm-12">
-            <div className="col-md-6 col-sm-6 text-right" style={{ paddingLeft: '10px' }}>
-              <h3 style={{ color: '#DDDDDE' }}><span className="fa  fa-map-marker"></span> Banyumas</h3>
-              <h1 style={{ color: '#ddd', marginTop: '-10px' }}>30<sup>o</sup></h1>
-            </div>
-            <div className="col-md-6 col-sm-6">
-                <div className="wheather">
-                <div className="stormy rainy animated pulse infinite">
-                  <div className="shadow"></div>
-                </div>
-                <div className="sub-wheather">
-                  <div className="thunder"></div>
-                  <div className="rain">
-                      <div className="droplet droplet1"></div>
-                      <div className="droplet droplet2"></div>
-                      <div className="droplet droplet3"></div>
-                      <div className="droplet droplet4"></div>
-                      <div className="droplet droplet5"></div>
-                      <div className="droplet droplet6"></div>
-                    </div>
-                </div>
-              </div>
-            </div>
-        </div>
-        </div>
-      </div>
-    </div>
-  )
+import React from 'react';
+import Box from '@material-ui/core/Box';
+import CardItem from '../components/CardItem';
+import Grid from '@material-ui/core/Grid';
+interface HomeProps {
+  favoriteList: number[],
+  setFavoriteList: (favoriteList: number[]) => void;
+  cardList: {
+    id: number,
+    shop: string,
+    name: string,
+    date: string,
+    photo: string,
+    price: string,
+    oldprice: string
+  }[];
 }
+
+const Home: React.FC<HomeProps> = ({favoriteList, setFavoriteList, cardList}) => {
+
+  const favState = { favoriteList: favoriteList, setFavoriteList: setFavoriteList }
+
+  return (
+    <Box my={4} style={{flexGrow: 1}}>
+      <Grid container spacing={3}>
+      {cardList.map((item, i) => (
+        <Grid item xs={12} sm={6} md={3} key={i}>
+          <CardItem data={item} favState={favState} />
+        </Grid>
+        ))}
+      </Grid>
+    </Box>
+  );
+}
+
+export default Home;
