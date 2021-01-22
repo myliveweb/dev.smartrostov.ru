@@ -25,8 +25,11 @@ function App() {
 
   const [cardList, setCardList] = React.useState([]);
 
+  const offset: number = 0
+  const limit: number = 8
+
   React.useEffect(() => {
-    axios.get(`https://api.zapolskiy.moscow/v2/?action=card_list`)
+    axios.get(`https://api.zapolskiy.moscow/v2/?action=card_list&offset=${offset}&limit=${limit}`)
       .then(res => {
         setCardList(() => res.data)
       })

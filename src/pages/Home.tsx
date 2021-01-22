@@ -12,7 +12,7 @@ interface HomeProps {
     date: string,
     photo: string,
     price: string,
-    oldPrice: string
+    oldprice: string
   }[];
 }
 

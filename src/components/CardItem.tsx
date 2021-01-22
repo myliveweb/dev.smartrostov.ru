@@ -50,7 +50,7 @@ interface CardItemProps {
     date: string,
     photo: string,
     price: string,
-    oldPrice: string
+    oldprice: string
   },
   favState: {
     favoriteList: number[],
@@ -60,7 +60,7 @@ interface CardItemProps {
 
 const CardItem: React.FC<CardItemProps> = (props) => {
 
-  const {id, name, date, photo, price, oldPrice} = { ...props.data }
+  const {id, name, date, photo, price, oldprice} = { ...props.data }
   const {favoriteList, setFavoriteList} = { ...props.favState }
   
   const classes = useStyles()
@@ -123,7 +123,7 @@ const CardItem: React.FC<CardItemProps> = (props) => {
         {price}
         </Typography>
         <Typography variant="h6" color="textSecondary" component="span" style={{marginLeft: '15px', textDecoration: 'line-through'}}>
-        {oldPrice}
+        {oldprice}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
