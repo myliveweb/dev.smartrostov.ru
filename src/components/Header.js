@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory, NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import { Theme, makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const StyledBadge = withStyles((theme: Theme) =>
+const StyledBadge = withStyles((theme) =>
   createStyles({
     badge: {
       right: -3,
@@ -38,17 +39,18 @@ const StyledBadge = withStyles((theme: Theme) =>
   }),
 )(Badge);
 
-interface HeaderProps {
-    title: string,
-    sections: {title: string, url: string}[],
-    favoriteList: number[],
-}
+const sections = [
+  { title: 'Главная', url: '/' },
+  { title: 'Категории', url: '/catalog' },
+  { title: 'Собрать свою', url: '/create' },
+  { title: 'Галлерея', url: '/gallery' },
+  { title: 'Как это работает', url: '/info' },
+  { title: 'О нас', url: '/about' },
+];
 
-export const Header: React.FC<HeaderProps> = (props) => {
+const Header = ({favorite}) => {
   const classes = useStyles();
   const history = useHistory()
-  
-  const { sections, favoriteList } = props;
 
   return (
     <>
@@ -65,7 +67,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
           <img src="/asset/img/1.png" alt="" />
         </Typography>
         <IconButton aria-label="cart">
-          <StyledBadge badgeContent={favoriteList.length} color="secondary">
+          <StyledBadge badgeContent={favorite.length} color="secondary">
             <FavoriteIcon style={{ color: 'red' }} />
           </StyledBadge>
         </IconButton>
@@ -96,3 +98,11 @@ export const Header: React.FC<HeaderProps> = (props) => {
   title: PropTypes.string,
   sections: PropTypes.array
 };*/
+
+const mapStateToProps = state => {
+  return {
+    favorite: state.favorite.favorite
+  }
+}
+
+export default connect(mapStateToProps, null)(Header)

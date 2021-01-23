@@ -45,13 +45,11 @@ const Card: React.FC<CardProps> = (props) => {
       })
   }, []);
 
-  console.log(cardItem)
-
   const classes = useStyles();
 
   return (
     <Box my={4} style={{flexGrow: 1}}>
-      <Grid container md={12}>
+      <Grid container>
       {cardItem.id > 0 &&
         <Paper className={classes.paper} elevation={1} >
           <Grid item xs={12} sm={6} md={4} style={{padding: '15px'}}>

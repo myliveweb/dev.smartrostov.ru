@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { addFavorite, delFavorite } from '../store/actions'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom'
 import Card from '@material-ui/core/Card';
@@ -14,7 +16,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       maxWidth: 345,
@@ -42,26 +44,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-interface CardItemProps {
-  data: {
-    id: number,
-    shop: string,
-    name: string,
-    date: string,
-    photo: string,
-    price: string,
-    oldprice: string
-  },
-  favState: {
-    favoriteList: number[],
-    setFavoriteList: (favoriteList: number[]) => void;
-  }
-}
 
-const CardItem: React.FC<CardItemProps> = (props) => {
+const CardItem = ({data, favorite, addFavorite, delFavorite}) => {
 
-  const {id, name, date, photo, price, oldprice} = { ...props.data }
-  const {favoriteList, setFavoriteList} = { ...props.favState }
+  const {id, name, date, photo, price, oldprice} = { ...data }
   
   const classes = useStyles()
   const history = useHistory()
@@ -76,13 +62,13 @@ const CardItem: React.FC<CardItemProps> = (props) => {
     setShadow(1)
   };
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, idFavorite: number) => {
+  const handleClick = (event) => {
     event.stopPropagation()
 
-    if(!favoriteList.includes(idFavorite)) {
-      setFavoriteList([...favoriteList, idFavorite]);
+    if(!favorite.includes(id)) {
+      addFavorite(id)
     } else {
-      setFavoriteList(favoriteList.filter(item => item !== idFavorite));
+      delFavorite(id)
     }
   };
 
@@ -127,7 +113,7 @@ const CardItem: React.FC<CardItemProps> = (props) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton className={favoriteList.includes(id) ? classes.favoriteActive : ''} aria-label="add to favorites" onClick={event => handleClick(event, id)}>
+        <IconButton className={favorite.includes(id) ? classes.favoriteActive : ''} aria-label="add to favorites" onClick={event => handleClick(event)}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
@@ -138,4 +124,15 @@ const CardItem: React.FC<CardItemProps> = (props) => {
   );
 }
 
-export default CardItem;
+const mapStateToProps = state => {
+  return {
+    favorite: state.favorite.favorite
+  }
+}
+
+const mapDispatchToProps = {
+  addFavorite,
+  delFavorite
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardItem);

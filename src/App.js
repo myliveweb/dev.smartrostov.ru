@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import { Header } from './components/Header'
+import Header from './components/Header'
 import { Footer } from './components/Footer'
 import Home from './pages/Home'
 import Card from './pages/Card'
@@ -12,21 +12,12 @@ import { Info } from './pages/Info'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
 
-const sections = [
-  { title: 'Главная', url: '/' },
-  { title: 'Категории', url: '/catalog' },
-  { title: 'Собрать свою', url: '/create' },
-  { title: 'Галлерея', url: '/gallery' },
-  { title: 'Как это работает', url: '/info' },
-  { title: 'О нас', url: '/about' },
-];
-
 function App() {
 
   const [cardList, setCardList] = React.useState([]);
 
-  const offset: number = 0
-  const limit: number = 8
+  const offset = 0
+  const limit = 8
 
   React.useEffect(() => {
     axios.get(`https://api.zapolskiy.moscow/v2/?action=card_list&offset=${offset}&limit=${limit}`)
@@ -34,19 +25,6 @@ function App() {
         setCardList(() => res.data)
       })
   }, []);
-
-  let init: number[] = []
-
-  const fav = window.localStorage.getItem('favoriteList')
-
-  if(fav)
-    init = JSON.parse(fav)
-
-  const [favoriteList, setFavoriteList] = React.useState(init);
-
-  React.useEffect(() => {
-    window.localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
-  }, [favoriteList]);
 
   return (
     <BrowserRouter>
@@ -58,9 +36,9 @@ function App() {
           <>
             <CssBaseline />
             <Container maxWidth="lg">
-              <Header title="Давай меняться" sections={sections} favoriteList={favoriteList} />
+              <Header />
               <Route path="/" exact>
-                <Home favoriteList={favoriteList} setFavoriteList={setFavoriteList} cardList={cardList} />
+                <Home cardList={cardList} />
               </Route>
               <Route path="/card/:id" component={Card} />
               <Route path="/info" component={Info} />
