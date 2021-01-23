@@ -55,7 +55,7 @@ const Header = ({favorite}) => {
   return (
     <>
       <Toolbar className={classes.toolbar}>
-        <Button size="small">Subscribe</Button>
+        <Button size="small">Назад</Button>
         <Typography
           component="h2"
           variant="h5"
