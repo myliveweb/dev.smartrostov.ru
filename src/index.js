@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux'
-import { rootReducer } from './store/rootReducer';
+import thunk from 'redux-thunk'
+import { rootReducer } from './store/reducers/rootReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { saveToLocalStorage, loadFromLocalStorage } from './store/localStorage'
 import App from './App';
@@ -14,7 +15,7 @@ import './index.css';
 const store = createStore(
   rootReducer,
   loadFromLocalStorage(),
-  composeWithDevTools(applyMiddleware(),)
+  composeWithDevTools(applyMiddleware(thunk),)
   )
 
 store.subscribe(() => saveToLocalStorage(store.getState()));

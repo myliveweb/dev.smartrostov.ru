@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { addFavorite, delFavorite } from '../store/actions'
+import { connect, useSelector } from 'react-redux'
+import { addFavorite, delFavorite } from '../store/actions/favoriteActions'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom'
 import Card from '@material-ui/core/Card';

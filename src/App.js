@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Header from './components/Header'
@@ -14,18 +13,6 @@ import { SignUp } from './pages/SignUp'
 
 function App() {
 
-  const [cardList, setCardList] = React.useState([]);
-
-  const offset = 0
-  const limit = 8
-
-  React.useEffect(() => {
-    axios.get(`https://api.zapolskiy.moscow/v2/?action=card_list&offset=${offset}&limit=${limit}`)
-      .then(res => {
-        setCardList(() => res.data)
-      })
-  }, []);
-
   return (
     <BrowserRouter>
       <Switch>
@@ -38,7 +25,7 @@ function App() {
             <Container maxWidth="lg">
               <Header />
               <Route path="/" exact>
-                <Home cardList={cardList} />
+                <Home />
               </Route>
               <Route path="/card/:id" component={Card} />
               <Route path="/info" component={Info} />
