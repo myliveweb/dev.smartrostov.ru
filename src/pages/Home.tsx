@@ -13,14 +13,12 @@ const Home: React.FC = () => {
 
   const cardList = useSelector((state: RootState) => state.card.cardList)
 
-  const loading = useSelector((state: RootState) => state.app.loading)
-
   let offset = 0;
   let limit = 8;
 
   React.useEffect(() => {
     dispatch(fetchCards(offset, limit))
-  }, [offset, limit]);
+  }, [offset, limit, dispatch]);
 
   if(!cardList || !cardList.length) {
     return <Loader />

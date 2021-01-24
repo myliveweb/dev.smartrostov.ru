@@ -19,7 +19,7 @@ const store = createStore(
   rootReducer,
   loadFromLocalStorage(),
   composeWithDevTools(applyMiddleware(logger, sagaMiddleware),)
-  )
+)
 
   sagaMiddleware.run(rootWatcher)
 

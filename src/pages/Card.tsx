@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     height: 0,
     paddingTop: '100%', // 16:9
     //paddingTop: '56.25%', // 16:9
-  },  
+  },
 });
 
 const init = {
@@ -56,7 +56,7 @@ const Card: React.FC<CardProps> = (props) => {
             <CardMedia
               className={classes.media}
               image={cardItem.photo}
-              title="Paella dish"
+              title={cardItem.name}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={8} style={{padding: '15px'}}>

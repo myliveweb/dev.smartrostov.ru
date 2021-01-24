@@ -117,7 +117,7 @@ const CardItem: React.FC<CardItemProps> = ({data}) => {
       <CardMedia
         className={classes.media}
         image={photo}
-        title="Paella dish"
+        title={name}
       />
       <CardContent>
         <Typography variant="h5" color="textPrimary" component="span">
