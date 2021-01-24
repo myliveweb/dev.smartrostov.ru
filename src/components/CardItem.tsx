@@ -1,8 +1,9 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { addFavorite, delFavorite } from '../store/actions/favoriteActions'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom'
+import { RootState } from '../interface'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -16,15 +17,14 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       maxWidth: 345,
     },
     media: {
       height: 0,
-      paddingTop: '100%', // 16:9
-      //paddingTop: '56.25%', // 16:9
+      paddingTop: '100%',
     },
     expand: {
       transform: 'rotate(0deg)',
@@ -45,7 +45,22 @@ const useStyles = makeStyles((theme) =>
   }),
 );
 
-const CardItem = ({data, favorite, addFavorite, delFavorite}) => {
+interface CardItemProps {
+  data: {
+    id: number,
+    name: string, 
+    date: string, 
+    photo: string, 
+    price: string, 
+    oldprice: string,
+  }
+}
+
+const CardItem: React.FC<CardItemProps> = ({data}) => {
+
+  const dispatch = useDispatch()
+
+  const favorite = useSelector((state: RootState) => state.favorite.favorite)
 
   const {id, name, date, photo, price, oldprice} = { ...data }
   
@@ -62,13 +77,13 @@ const CardItem = ({data, favorite, addFavorite, delFavorite}) => {
     setShadow(1)
   };
 
-  const handleClick = (event) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation()
 
     if(!favorite.includes(id)) {
-      addFavorite(id)
+      dispatch(addFavorite(id))
     } else {
-      delFavorite(id)
+      dispatch(delFavorite(id))
     }
   };
 
@@ -124,15 +139,4 @@ const CardItem = ({data, favorite, addFavorite, delFavorite}) => {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    favorite: state.favorite.favorite
-  }
-}
-
-const mapDispatchToProps = {
-  addFavorite,
-  delFavorite
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardItem);
+export default CardItem;

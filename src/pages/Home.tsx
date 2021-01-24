@@ -1,16 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../interface'
 import { fetchCards } from '../store/actions/cardActions'
 import Box from '@material-ui/core/Box';
 import CardItem from '../components/CardItem';
 import Grid from '@material-ui/core/Grid';
 import { Loader } from '../components/Loader'
 
-const Home = () => {
+const Home: React.FC = () => {
 
   const dispatch = useDispatch()
-  const cardList = useSelector(state => state.card.cardList)
-  const loading = useSelector(state => state.app.loading)
+
+  const cardList = useSelector((state: RootState) => state.card.cardList)
+
+  const loading = useSelector((state: RootState) => state.app.loading)
 
   let offset = 0;
   let limit = 8;
@@ -19,7 +22,7 @@ const Home = () => {
     dispatch(fetchCards(offset, limit))
   }, [offset, limit]);
 
-  if(!cardList || !cardList.length || loading) {
+  if(!cardList || !cardList.length) {
     return <Loader />
   }
 

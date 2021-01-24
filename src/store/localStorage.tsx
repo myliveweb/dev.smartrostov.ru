@@ -1,5 +1,7 @@
+import { RootState } from "../interface";
+
 // convert object to string and store in localStorage
-export const saveToLocalStorage = state => {
+export const saveToLocalStorage = (state: RootState) => {
   try {
     const serialisedState = JSON.stringify(state);
     window.localStorage.setItem("persistantState", serialisedState);
