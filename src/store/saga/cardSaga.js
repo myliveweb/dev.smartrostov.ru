@@ -2,7 +2,7 @@ import { takeEvery, put, call } from 'redux-saga/effects'
 import axios from "axios";
 import { showLoader, hideLoader } from "../actions/appActions";
 import { sagaFetchCards } from "../actions/cardActions";
-import { SAGA_FETCH_CARDS } from '../types/types'
+import { SAGA_FETCH_CARDS } from '../types'
 
 const getDataList = (params) => {
   const { offset, limit } = { ...params }

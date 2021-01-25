@@ -1,15 +1,15 @@
-import { ADD_FAVORITE, DEL_FAVORITE } from "../types/types";
+import { ADD_FAVORITE, DEL_FAVORITE } from '../types'
 
 export function addFavorite(id: number) {
   return {
     type: ADD_FAVORITE,
-    payload: id
+    payload: id,
   }
 }
 
 export function delFavorite(id: number) {
   return {
     type: DEL_FAVORITE,
-    payload: id
+    payload: id,
   }
 }

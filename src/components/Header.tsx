@@ -1,15 +1,25 @@
-import React from 'react';
+import React from 'react'
 import { useHistory, NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { Theme, makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
-import Typography from '@material-ui/core/Typography';
-import Badge from '@material-ui/core/Badge';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import { useSelector, useDispatch } from 'react-redux'
+import { showSignIn } from '../store/actions/appActions'
+import { RootState } from '../interface'
+import {
+  Theme,
+  makeStyles,
+  withStyles,
+  createStyles,
+} from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+import SearchIcon from '@material-ui/icons/Search'
+import Badge from '@material-ui/core/Badge'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import useScrollTrigger from '@material-ui/core/useScrollTrigger'
+import Slide from '@material-ui/core/Slide'
 
 const useStyles = makeStyles((theme: Theme) => ({
   toolbar: {
@@ -30,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   lastGrid: {
     textAlign: 'right',
   },
-}));
+}))
 
 const StyledBadge = withStyles((theme) =>
   createStyles({
@@ -40,8 +50,8 @@ const StyledBadge = withStyles((theme) =>
       border: `2px solid ${theme.palette.background.paper}`,
       padding: '0 4px',
     },
-  }),
-)(Badge);
+  })
+)(Badge)
 
 const sections = [
   { title: 'Главная', url: '/' },
@@ -50,77 +60,99 @@ const sections = [
   { title: 'Галлерея', url: '/gallery' },
   { title: 'Как это работает', url: '/info' },
   { title: 'О нас', url: '/about' },
-];
+]
 
-interface HeaderProps {
+interface Props {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window?: () => Window
+  children: React.ReactElement
   favorite: number[]
 }
 
-const Header: React.FC<HeaderProps> = () => {
-  const classes = useStyles();
-  const history = useHistory()
-
-  interface RootState {
-    favorite: {
-      favorite: number[]
-    },
-    card: {
-      cardList: {}[]
-    },
-    app: {
-      loading: boolean
-    }
-  }
-
-  const selectFavorite = (state: RootState) => state.favorite.favorite
-  const favorite = useSelector(selectFavorite)
+function HideOnScroll(props: Props) {
+  const { children, window } = props
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({ target: window ? window() : undefined })
 
   return (
-    <>
-      <Toolbar className={classes.toolbar}>
-        <Grid item xs={12} sm={6} md={3}>
-          <Button size="small" onClick={() => history.goBack()}>Назад</Button>
-        </Grid>
-        <Grid item xs={12} sm={6} md={6}>
-          <Typography
-            component="h2"
-            variant="h5"
-            color="inherit"
-            align="center"
-            noWrap
-            className={classes.toolbarTitle}
-          >
-            <img src="/asset/img/1.png" alt="" />
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3} className={classes.lastGrid}>
-          <IconButton aria-label="cart">
-            <StyledBadge badgeContent={favorite.length} color="secondary">
-              <FavoriteIcon style={{ color: 'red' }} />
-            </StyledBadge>
-          </IconButton>
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
-          <Button variant="outlined" size="small" onClick={() => history.push('/signin')}>
-            Вход
-          </Button>
-        </Grid>
-      </Toolbar>
-      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-        {sections.map((section) => (
-          <NavLink
-          color="inherit"
-          key={section.title}
-          to={section.url}
-          className={classes.toolbarLink}
-        >
-            {section.title}
-          </NavLink>
-        ))}
-      </Toolbar>
-    </>
-  );
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  )
 }
 
-export default Header;
+const Header: React.FC<Props> = (props) => {
+  const classes = useStyles()
+  const history = useHistory()
+
+  const dispatch = useDispatch()
+
+  const favorite = useSelector((state: RootState) => state.favorite.favorite)
+
+  const handleShow = () => dispatch(showSignIn())
+
+  return (
+    <HideOnScroll {...props}>
+      <AppBar
+        style={{ backgroundColor: '#fff', maxWidth: '1232px', right: 'auto' }}
+      >
+        <Toolbar className={classes.toolbar}>
+          <Grid item xs={12} sm={6} md={3}>
+            <Button size="small" onClick={() => history.goBack()}>
+              Назад
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6}>
+            <Typography
+              component="h2"
+              variant="h5"
+              color="inherit"
+              align="center"
+              noWrap
+              className={classes.toolbarTitle}
+            >
+              <img src="/asset/img/1.png" alt="" />
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} className={classes.lastGrid}>
+            <IconButton aria-label="cart">
+              <StyledBadge badgeContent={favorite.length} color="secondary">
+                <FavoriteIcon style={{ color: 'red' }} />
+              </StyledBadge>
+            </IconButton>
+            <IconButton>
+              <SearchIcon />
+            </IconButton>
+
+            <Button variant="outlined" size="small" onClick={handleShow}>
+              Вход
+            </Button>
+          </Grid>
+        </Toolbar>
+        <Toolbar
+          component="nav"
+          variant="dense"
+          className={classes.toolbarSecondary}
+        >
+          {sections.map((section) => (
+            <NavLink
+              color="inherit"
+              key={section.title}
+              to={section.url}
+              className={classes.toolbarLink}
+            >
+              {section.title}
+            </NavLink>
+          ))}
+        </Toolbar>
+      </AppBar>
+    </HideOnScroll>
+  )
+}
+
+export default Header
