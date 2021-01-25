@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { hideSignUp, showSignIn } from '../store/actions/appActions'
 import Avatar from '@material-ui/core/Avatar'
@@ -53,16 +53,14 @@ export const SignUp: React.FC = () => {
   }
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      style={{ zIndex: 1300 }}
-      onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
-        event.stopPropagation()
-      }
-    >
+    <Container component="main" maxWidth="xs" style={{ zIndex: 1300 }}>
       <CssBaseline />
-      <div className={classes.paper}>
+      <div
+        className={classes.paper}
+        onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+          event.stopPropagation()
+        }
+      >
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>

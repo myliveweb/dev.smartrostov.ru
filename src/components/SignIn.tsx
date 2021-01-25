@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { hideSignIn, showSignUp } from '../store/actions/appActions'
 import Avatar from '@material-ui/core/Avatar'
@@ -9,12 +9,10 @@ import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import Grid from '@material-ui/core/Grid'
-import Box from '@material-ui/core/Box'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
-import Copyright from './Copyright'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,16 +52,14 @@ export const SignIn: React.FC = () => {
   }
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      style={{ zIndex: 1300 }}
-      onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
-        event.stopPropagation()
-      }
-    >
+    <Container component="main" maxWidth="xs" style={{ zIndex: 1300 }}>
       <CssBaseline />
-      <div className={classes.paper}>
+      <div
+        className={classes.paper}
+        onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+          event.stopPropagation()
+        }
+      >
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -106,15 +102,15 @@ export const SignIn: React.FC = () => {
           >
             Вход
           </Button>
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <div style={{ marginLeft: '12px' }}>
-                <NavLink to="#">Забыли пароль?</NavLink>
+          <Grid container style={{ justifyContent: 'space-around' }}>
+            <Grid item sm={6}>
+              <div style={{ textAlign: 'left', marginLeft: '12px' }}>
+                <Link to="#">Забыли пароль?</Link>
               </div>
             </Grid>
-            <Grid item xs={12} sm={6} style={{ textAlign: 'right' }}>
-              <div style={{ marginRight: '12px' }}>
-                <Link to="" onClick={handleShowSignUp}>
+            <Grid item sm={6}>
+              <div style={{ textAlign: 'right', marginRight: '12px' }}>
+                <Link to="#" onClick={handleShowSignUp}>
                   {'Регистрация'}
                 </Link>
               </div>
@@ -122,9 +118,6 @@ export const SignIn: React.FC = () => {
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
     </Container>
   )
 }
