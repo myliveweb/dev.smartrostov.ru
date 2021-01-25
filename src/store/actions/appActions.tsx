@@ -1,4 +1,11 @@
-import { SHOW_LOADER, HIDE_LOADER, SHOW_SIGN_IN, HIDE_SIGN_IN } from '../types'
+import {
+  SHOW_LOADER,
+  HIDE_LOADER,
+  SHOW_SIGN_IN,
+  HIDE_SIGN_IN,
+  HIDE_SIGN_UP,
+  SHOW_SIGN_UP,
+} from '../types'
 
 export function showLoader() {
   return {
@@ -21,5 +28,17 @@ export function showSignIn() {
 export function hideSignIn() {
   return {
     type: HIDE_SIGN_IN,
+  }
+}
+
+export function showSignUp() {
+  return {
+    type: SHOW_SIGN_UP,
+  }
+}
+
+export function hideSignUp() {
+  return {
+    type: HIDE_SIGN_UP,
   }
 }

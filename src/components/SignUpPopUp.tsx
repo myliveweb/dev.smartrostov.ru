@@ -1,10 +1,10 @@
 import React from 'react'
 import Backdrop from '@material-ui/core/Backdrop'
 import { useSelector, useDispatch } from 'react-redux'
-import { hideSignIn } from '../store/actions/appActions'
+import { hideSignUp } from '../store/actions/appActions'
 import { RootState } from '../interface'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { SignIn } from './SignIn'
+import { SignUp } from './SignUp'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,22 +15,22 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-const SignInPopUp: React.FC = () => {
+const SignUpPopUp: React.FC = () => {
   const classes = useStyles()
 
   const dispatch = useDispatch()
 
-  const open = useSelector((state: RootState) => state.app.signInPopUp)
+  const open = useSelector((state: RootState) => state.app.signUpPopUp)
 
-  const handleClose = () => dispatch(hideSignIn())
+  const handleClose = () => dispatch(hideSignUp())
 
   return (
     <div>
       <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-        <SignIn />
+        <SignUp />
       </Backdrop>
     </div>
   )
 }
 
-export default SignInPopUp
+export default SignUpPopUp

@@ -8,9 +8,10 @@ import Home from './pages/Home'
 import Card from './pages/Card'
 import { About } from './pages/About'
 import { Info } from './pages/Info'
-import { SignIn } from './pages/SignIn'
-import { SignUp } from './pages/SignUp'
+import { SignIn } from './components/SignIn'
+import { SignUp } from './components/SignUp'
 import SignInPopUp from './components/SignInPopUp'
+import SignUpPopUp from './components/SignUpPopUp'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
             </Container>
             <Footer />
             <SignInPopUp />
+            <SignUpPopUp />
           </>
         </Route>
       </Switch>

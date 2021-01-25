@@ -15,5 +15,6 @@ export interface RootState {
   app: {
     loading: boolean
     signInPopUp: boolean
+    signUpPopUp: boolean
   }
 }

@@ -1,5 +1,7 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { hideSignIn, showSignUp } from '../store/actions/appActions'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -12,7 +14,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
-import Copyright from '../components/Copyright'
+import Copyright from './Copyright'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,12 +42,23 @@ const useStyles = makeStyles((theme) => ({
 export const SignIn: React.FC = () => {
   const classes = useStyles()
 
+  const dispatch = useDispatch()
+
+  const handleShowSignUp = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    event.stopPropagation()
+    event.preventDefault()
+    dispatch(hideSignIn())
+    dispatch(showSignUp())
+  }
+
   return (
     <Container
       component="main"
       maxWidth="xs"
       style={{ zIndex: 1300 }}
-      onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+      onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
         event.stopPropagation()
       }
     >
@@ -94,16 +107,17 @@ export const SignIn: React.FC = () => {
             Вход
           </Button>
           <Grid container>
-            <Grid item xs={12} sm={6} style={{ paddingLeft: '24px' }}>
-              <NavLink to="#">Забыли пароль?</NavLink>
+            <Grid item xs={12} sm={6}>
+              <div style={{ marginLeft: '12px' }}>
+                <NavLink to="#">Забыли пароль?</NavLink>
+              </div>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              style={{ textAlign: 'right', paddingRight: '24px' }}
-            >
-              <NavLink to="/signup">{'Регистрация'}</NavLink>
+            <Grid item xs={12} sm={6} style={{ textAlign: 'right' }}>
+              <div style={{ marginRight: '12px' }}>
+                <Link to="" onClick={handleShowSignUp}>
+                  {'Регистрация'}
+                </Link>
+              </div>
             </Grid>
           </Grid>
         </form>
