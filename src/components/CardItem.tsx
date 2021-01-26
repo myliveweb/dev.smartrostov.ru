@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { addFavorite, delFavorite } from '../store/actions/favoriteActions'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom'
+import { RootState } from '../interface'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -21,8 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     media: {
       height: 0,
-      paddingTop: '100%', // 16:9
-      //paddingTop: '56.25%', // 16:9
+      paddingTop: '100%',
     },
     expand: {
       transform: 'rotate(0deg)',
@@ -42,26 +44,25 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+
 interface CardItemProps {
   data: {
     id: number,
-    shop: string,
-    name: string,
-    date: string,
-    photo: string,
-    price: string,
-    oldprice: string
-  },
-  favState: {
-    favoriteList: number[],
-    setFavoriteList: (favoriteList: number[]) => void;
+    name: string, 
+    date: string, 
+    photo: string, 
+    price: string, 
+    oldprice: string,
   }
 }
 
-const CardItem: React.FC<CardItemProps> = (props) => {
+const CardItem: React.FC<CardItemProps> = ({data}) => {
 
-  const {id, name, date, photo, price, oldprice} = { ...props.data }
-  const {favoriteList, setFavoriteList} = { ...props.favState }
+  const dispatch = useDispatch()
+
+  const favorite = useSelector((state: RootState) => state.favorite.favorite)
+
+  const {id, name, date, photo, price, oldprice} = { ...data }
   
   const classes = useStyles()
   const history = useHistory()
@@ -76,13 +77,13 @@ const CardItem: React.FC<CardItemProps> = (props) => {
     setShadow(1)
   };
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, idFavorite: number) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation()
 
-    if(!favoriteList.includes(idFavorite)) {
-      setFavoriteList([...favoriteList, idFavorite]);
+    if(!favorite.includes(id)) {
+      dispatch(addFavorite(id))
     } else {
-      setFavoriteList(favoriteList.filter(item => item !== idFavorite));
+      dispatch(delFavorite(id))
     }
   };
 
@@ -116,7 +117,7 @@ const CardItem: React.FC<CardItemProps> = (props) => {
       <CardMedia
         className={classes.media}
         image={photo}
-        title="Paella dish"
+        title={name}
       />
       <CardContent>
         <Typography variant="h5" color="textPrimary" component="span">
@@ -127,7 +128,7 @@ const CardItem: React.FC<CardItemProps> = (props) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton className={favoriteList.includes(id) ? classes.favoriteActive : ''} aria-label="add to favorites" onClick={event => handleClick(event, id)}>
+        <IconButton className={favorite.includes(id) ? classes.favoriteActive : ''} aria-label="add to favorites" onClick={event => handleClick(event)}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">

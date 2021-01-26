@@ -1,18 +1,18 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom'
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Copyright from '../components/Copyright'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { hideSignUp, showSignIn } from '../store/actions/appActions'
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import TextField from '@material-ui/core/TextField'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
+import Grid from '@material-ui/core/Grid'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: '#ffffff',
+    padding: 24,
   },
   avatar: {
     margin: theme.spacing(1),
@@ -32,15 +34,31 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}));
+}))
 
 export const SignUp: React.FC = () => {
-  const classes = useStyles();
+  const classes = useStyles()
+
+  const dispatch = useDispatch()
+
+  const handleShowSignIn = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    event.stopPropagation()
+    event.preventDefault()
+    dispatch(hideSignUp())
+    dispatch(showSignIn())
+  }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" style={{ zIndex: 1300 }}>
       <CssBaseline />
-      <div className={classes.paper}>
+      <div
+        className={classes.paper}
+        onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+          event.stopPropagation()
+        }
+      >
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -113,16 +131,15 @@ export const SignUp: React.FC = () => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <NavLink to="/signin">
-                Уже есть аккаунт? Войти
-              </NavLink>
+              <div style={{ marginRight: '12px' }}>
+                <Link to="" onClick={handleShowSignIn}>
+                  {'Уже есть аккаунт? Войти'}
+                </Link>
+              </div>
             </Grid>
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
     </Container>
-  );
+  )
 }
