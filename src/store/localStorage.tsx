@@ -17,7 +17,6 @@ export const loadFromLocalStorage = () => {
     const serialisedState = window.localStorage.getItem('persistantState')
     if (serialisedState === null) return undefined
     const json = JSON.parse(serialisedState)
-    console.log(json)
     return {
       ...json,
       app: { loading: false, signInPopUp: false, signUpPopUp: false },

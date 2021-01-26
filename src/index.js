@@ -25,12 +25,18 @@ const store = createStore(
 
 store.subscribe(() => saveToLocalStorage(store.getState()));
 
-const app = (
+/*const appStrictMode = (
   <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>
+)*/
+
+const app = (
+  <Provider store={store}>
+    <App />
+  </Provider>
 )
 
 ReactDOM.render(app,

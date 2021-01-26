@@ -24,6 +24,10 @@ const SignUpPopUp: React.FC = () => {
 
   const handleClose = () => dispatch(hideSignUp())
 
+  if (!open) {
+    return <div></div>
+  }
+
   return (
     <div>
       <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
