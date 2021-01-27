@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects'
 import { watchFetchCards } from './cardSaga'
-import { watchAuth } from './authSaga'
+import { watchAuth, watchLogout } from './authSaga'
 
 export function* rootWatcher() {
-  yield all([watchFetchCards(), watchAuth(),])
+  yield all([watchFetchCards(), watchAuth(), watchLogout(),])
 }

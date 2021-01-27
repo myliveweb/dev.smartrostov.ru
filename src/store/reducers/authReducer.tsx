@@ -1,4 +1,4 @@
-import { AUTH } from '../types'
+import { AUTH, LOGOUT } from '../types'
 
 export const authReducer: any = (
   state = { user: {} },
@@ -6,6 +6,8 @@ export const authReducer: any = (
 ) => {
   switch (action.type) {
     case AUTH:
+      return { ...state, user: action.payload }
+    case LOGOUT:
       return { ...state, user: action.payload }
     default:
       return state

@@ -2,6 +2,7 @@ import React from 'react'
 import { useHistory, NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { showSignIn } from '../store/actions/appActions'
+import { logoutUser } from '../store/actions/authActions'
 import { RootState } from '../interface'
 import {
   Theme,
@@ -15,11 +16,13 @@ import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import Badge from '@material-ui/core/Badge'
 import FavoriteIcon from '@material-ui/icons/Favorite'
+import Avatar from '@material-ui/core/Avatar'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Slide from '@material-ui/core/Slide'
+import { deepPurple } from '@material-ui/core/colors'
 
 const useStyles = makeStyles((theme: Theme) => ({
   toolbar: {
@@ -39,6 +42,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   lastGrid: {
     textAlign: 'right',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    color: theme.palette.getContrastText(deepPurple[500]),
+    backgroundColor: deepPurple[500],
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+    display: 'inline-flex',
+    top: '3px',
+  },
+  toolbarUserName: {
+    color: 'rgba(0, 0, 0, 0.87)',
+    display: 'inline-block',
+    top: '10px',
+    position: 'relative',
+    marginRight: '15px',
   },
 }))
 
@@ -93,8 +112,12 @@ const Header: React.FC<Props> = (props) => {
   const dispatch = useDispatch()
 
   const favorite = useSelector((state: RootState) => state.favorite.favorite)
+  const user = useSelector((state: RootState) => state.auth.user)
+  const { auth: userAuth, data: userData } = { ...user }
 
   const handleShow = () => dispatch(showSignIn())
+
+  const handleLogout = () => dispatch(logoutUser(userData.id, userData.token))
 
   return (
     <HideOnScroll {...props}>
@@ -102,12 +125,12 @@ const Header: React.FC<Props> = (props) => {
         style={{ backgroundColor: '#fff', maxWidth: '1232px', right: 'auto' }}
       >
         <Toolbar className={classes.toolbar}>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
             <Button size="small" onClick={() => history.goBack()}>
               Назад
             </Button>
           </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+          <Grid item xs={12} sm={6} md={4}>
             <Typography
               component="h2"
               variant="h5"
@@ -119,7 +142,18 @@ const Header: React.FC<Props> = (props) => {
               <img src="/asset/img/1.png" alt="" />
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={6} md={3} className={classes.lastGrid}>
+          <Grid item xs={12} sm={6} md={4} className={classes.lastGrid}>
+            {userAuth ? (
+              <>
+                <Avatar className={classes.avatar}></Avatar>
+                <Typography noWrap className={classes.toolbarUserName}>
+                  {userData.first_name}&nbsp;
+                  {userData.last_name}
+                </Typography>
+              </>
+            ) : (
+              ''
+            )}
             <IconButton aria-label="cart">
               <StyledBadge badgeContent={favorite.length} color="secondary">
                 <FavoriteIcon style={{ color: 'red' }} />
@@ -128,10 +162,15 @@ const Header: React.FC<Props> = (props) => {
             <IconButton>
               <SearchIcon />
             </IconButton>
-
-            <Button variant="outlined" size="small" onClick={handleShow}>
-              Вход
-            </Button>
+            {userAuth ? (
+              <Button variant="outlined" size="small" onClick={handleLogout}>
+                Выход
+              </Button>
+            ) : (
+              <Button variant="outlined" size="small" onClick={handleShow}>
+                Вход
+              </Button>
+            )}
           </Grid>
         </Toolbar>
         <Toolbar

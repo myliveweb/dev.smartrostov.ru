@@ -1,8 +1,8 @@
 import { takeEvery, put, call } from 'redux-saga/effects'
 import getData from './sendRequest'
 import { showLoader, hideLoader } from "../actions/appActions";
-import { sagaAuth } from "../actions/authActions";
-import { SAGA_AUTH } from '../types'
+import { sagaAuth, sagaLogout } from "../actions/authActions";
+import { SAGA_AUTH, SAGA_LOGOUT } from '../types'
 
 function* workerAuth(params) {
   yield put(showLoader())
@@ -14,4 +14,16 @@ function* workerAuth(params) {
 
 export function* watchAuth() {
   yield takeEvery(SAGA_AUTH, workerAuth)
+}
+
+function* workerLogout(params) {
+  yield put(showLoader())
+  const postData = { ...params, action: 'auth', method: 'logout' }
+  const data = yield call(getData, postData)
+  yield put(sagaLogout(data))
+  yield put(hideLoader())
+}
+
+export function* watchLogout() {
+  yield takeEvery(SAGA_LOGOUT, workerLogout)
 }
