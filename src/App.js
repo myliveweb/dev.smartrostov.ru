@@ -6,6 +6,7 @@ import Header from './components/Header'
 import { Footer } from './components/Footer'
 import Home from './pages/Home'
 import { Create } from './pages/Create'
+import { Gallery } from './pages/Gallery'
 import Card from './pages/Card'
 import { About } from './pages/About'
 import { Info } from './pages/Info'
@@ -31,6 +32,7 @@ function App() {
                 <Home />
               </Route>
               <Route path="/create" component={Create} />
+              <Route path="/gallery" component={Gallery} />
               <Route path="/card/:id" component={Card} />
               <Route path="/info" component={Info} />
               <Route path="/about" component={About} />
