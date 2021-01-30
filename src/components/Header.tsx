@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(3),
     display: 'inline-flex',
     top: '3px',
+    marginLeft: '12px',
   },
   toolbarUserName: {
     color: 'rgba(0, 0, 0, 0.87)',
@@ -143,6 +144,9 @@ const Header: React.FC<Props> = (props) => {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6} md={4} className={classes.lastGrid}>
+            <IconButton>
+              <SearchIcon />
+            </IconButton>
             {userAuth ? (
               <>
                 <Avatar className={classes.avatar}></Avatar>
@@ -154,13 +158,10 @@ const Header: React.FC<Props> = (props) => {
             ) : (
               ''
             )}
-            <IconButton aria-label="cart">
+            <IconButton aria-label="cart" style={{ marginRight: '24px' }}>
               <StyledBadge badgeContent={favorite.length} color="secondary">
                 <FavoriteIcon style={{ color: 'red' }} />
               </StyledBadge>
-            </IconButton>
-            <IconButton>
-              <SearchIcon />
             </IconButton>
             {userAuth ? (
               <Button variant="outlined" size="small" onClick={handleLogout}>

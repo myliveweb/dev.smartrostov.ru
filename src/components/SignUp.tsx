@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { hideSignUp, showSignIn } from '../store/actions/appActions'
+import { registerUser, sagaRegister } from '../store/actions/authActions'
+import { RootState } from '../interface'
 import { Form } from 'react-final-form'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
@@ -45,6 +47,37 @@ export const SignUp: React.FC = () => {
 
   const dispatch = useDispatch()
 
+  const user = useSelector((state: RootState) => state.auth.user)
+
+  const [disabledSubmit, setDisabledSubmit] = React.useState(false)
+
+  React.useEffect(() => {
+    if (
+      (user.message && user.status === 'success') ||
+      (user.message && user.status === 'warning')
+    ) {
+      setTimeout(() => {
+        dispatch(hideSignUp())
+        dispatch(sagaRegister({ ...user, message: '', status: '' }))
+        setDisabledSubmit(false)
+      }, 2500)
+    } else if (user.message && user.status === 'error') {
+      setDisabledSubmit(false)
+    }
+  }, [user, disabledSubmit, dispatch])
+
+  const handleSubmitForm = (formObj: Record<string, any>) => {
+    setDisabledSubmit(true)
+    dispatch(
+      registerUser(
+        formObj.firstName,
+        formObj.lastName,
+        formObj.email,
+        formObj.password
+      )
+    )
+  }
+
   const handleShowSignIn = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
@@ -69,9 +102,38 @@ export const SignUp: React.FC = () => {
         <Typography component="h1" variant="h5">
           Регистрация
         </Typography>
+        {user.message && user.status === 'success' ? (
+          <Typography component="h6" variant="h6" style={{ color: 'green' }}>
+            {user.message}
+          </Typography>
+        ) : (
+          ''
+        )}
+        {user.message && user.status === 'warning' ? (
+          <Typography
+            component="h6"
+            variant="h6"
+            style={{ color: 'rgb(35 143 191)' }}
+          >
+            {user.message}
+          </Typography>
+        ) : (
+          ''
+        )}
+        {user.message && user.status === 'error' ? (
+          <Typography
+            component="h6"
+            variant="h6"
+            style={{ color: 'rgb(245 0 87)' }}
+          >
+            {user.message}
+          </Typography>
+        ) : (
+          ''
+        )}
         <Form
           onSubmit={(formObj) => {
-            console.log(formObj)
+            handleSubmitForm(formObj)
           }}
         >
           {({ handleSubmit }) => (
@@ -116,6 +178,7 @@ export const SignUp: React.FC = () => {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                disabled={disabledSubmit}
               >
                 Зарегистрировать
               </Button>

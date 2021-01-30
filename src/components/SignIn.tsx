@@ -61,7 +61,7 @@ export const SignIn: React.FC = () => {
         dispatch(hideSignIn())
         dispatch(sagaAuth({ ...user, message: '', status: '' }))
         setDisabledSubmit(false)
-      }, 3000)
+      }, 2500)
     } else if (user.message && user.status === 'error') {
       setDisabledSubmit(false)
     }
