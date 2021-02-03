@@ -33,7 +33,14 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 }
 
-
+const sections = [
+  { title: 'Главная', url: '/' },
+  { title: 'Категории', url: '/catalog' },
+  { title: 'Собрать свою', url: '/create' },
+  { title: 'Галлерея', url: '/gallery' },
+  { title: 'Как это работает', url: '/info' },
+  { title: 'О нас', url: '/about' },
+]
 
 export default function FullWidthTabs() {
   const history = useHistory()
@@ -46,7 +53,7 @@ export default function FullWidthTabs() {
 
   return (
     <div>
-      <AppBar position="static" color="default">
+      <AppBar position="static" style={{ backgroundColor: '#ffffff' }}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -55,9 +62,9 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Item One 0" onClick={() => history.push('/info')} />
-          <Tab label="Item Two 1" onClick={() => history.push('/')} />
-          <Tab label="Item Three 2" />
+          {sections.map((section) => (
+            <Tab label={section['title']} onClick={() => history.push(section['url'])} />
+          ))}
         </Tabs>
       </AppBar>
     </div>

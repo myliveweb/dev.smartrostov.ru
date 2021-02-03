@@ -3,7 +3,7 @@ import FullWidthTabs from '../components/FullWidthTabs'
 
 export const Create: React.FC = () => {
   return (
-    <div style={{ width: '640px', margin: '30px auto' }}>
+    <div style={{ margin: '30px auto' }}>
       <FullWidthTabs />
     </div>
   )

@@ -23,6 +23,7 @@ import Typography from '@material-ui/core/Typography'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Slide from '@material-ui/core/Slide'
 import { deepPurple } from '@material-ui/core/colors'
+import FullWidthTabs from '../components/FullWidthTabs'
 
 const useStyles = makeStyles((theme: Theme) => ({
   toolbar: {
@@ -174,22 +175,7 @@ const Header: React.FC<Props> = (props) => {
             )}
           </Grid>
         </Toolbar>
-        <Toolbar
-          component="nav"
-          variant="dense"
-          className={classes.toolbarSecondary}
-        >
-          {sections.map((section) => (
-            <NavLink
-              color="inherit"
-              key={section.title}
-              to={section.url}
-              className={classes.toolbarLink}
-            >
-              {section.title}
-            </NavLink>
-          ))}
-        </Toolbar>
+        <FullWidthTabs />
       </AppBar>
     </HideOnScroll>
   )
