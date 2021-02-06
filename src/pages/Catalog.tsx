@@ -1,9 +1,7 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
 
-export const Create: React.FC = () => {
-  console.log('Render Create')
-
+export const Catalog: React.FC = () => {
   return (
     <Typography
       component="h2"
@@ -15,7 +13,7 @@ export const Create: React.FC = () => {
         height: '500px',
       }}
     >
-      CREATE
+      CATALOG
     </Typography>
   )
 }

@@ -6,7 +6,12 @@ export const Info: React.FC = () => {
     <Typography
       component="h2"
       variant="h2"
-      style={{ color: 'green', textAlign: 'center', margin: '100px' }}
+      style={{
+        color: 'green',
+        textAlign: 'center',
+        margin: '100px',
+        height: '500px',
+      }}
     >
       INFO
     </Typography>

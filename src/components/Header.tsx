@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory, NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { showSignIn } from '../store/actions/appActions'
 import { logoutUser } from '../store/actions/authActions'
@@ -73,16 +73,6 @@ const StyledBadge = withStyles((theme) =>
     },
   })
 )(Badge)
-
-const sections = [
-  { title: 'Главная', url: '/' },
-  { title: 'Категории', url: '/catalog' },
-  { title: 'Собрать свою', url: '/create' },
-  { title: 'Галлерея', url: '/gallery' },
-  { title: 'Как это работает', url: '/info' },
-  { title: 'О нас', url: '/about' },
-]
-
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
@@ -90,7 +80,7 @@ interface Props {
    */
   window?: () => Window
   children: React.ReactElement
-  favorite: number[]
+  //favorite: number[]
 }
 
 function HideOnScroll(props: Props) {
@@ -107,7 +97,7 @@ function HideOnScroll(props: Props) {
   )
 }
 
-const Header: React.FC<Props> = (props) => {
+const Header: React.FC = (props) => {
   const classes = useStyles()
   const history = useHistory()
 

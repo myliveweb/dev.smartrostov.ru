@@ -1,4 +1,6 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setTopMenu } from '../store/actions/appActions'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import AppBar from '@material-ui/core/AppBar'
@@ -42,14 +44,42 @@ const sections = [
   { title: 'О нас', url: '/about' },
 ]
 
+const checkPathnameValue = () => {
+  const { pathname } = window.location;
+  switch (pathname) {
+    case '/':
+    case '/catalog':
+    case '/create':
+    case '/gallery':
+    case '/info':
+    case '/about':
+    break;
+  default:
+    return false;
+  }
+  return pathname;
+}
+
+
+
 export default function FullWidthTabs() {
   const history = useHistory()
 
-  const [value, setValue] = React.useState(0)
+  const dispatch = useDispatch()
+
+  const value = useSelector((state) => state.app.menuValue)
 
   const handleChange = (event, newValue) => {
-    setValue(newValue)
+    dispatch(setTopMenu(newValue))
   }
+
+  const curValue = checkPathnameValue()
+
+  if(value === undefined || curValue !== value) {
+    dispatch(setTopMenu(curValue))
+  }
+
+  console.log(value)
 
   return (
     <div>
@@ -62,8 +92,8 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          {sections.map((section) => (
-            <Tab label={section['title']} onClick={() => history.push(section['url'])} />
+          {sections.map((section, index) => (
+            <Tab label={section['title']} onClick={() => history.push(section['url'])} value={section['url']} key={index} />
           ))}
         </Tabs>
       </AppBar>

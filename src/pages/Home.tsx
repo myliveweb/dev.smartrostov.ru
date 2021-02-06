@@ -19,6 +19,8 @@ const Home: React.FC = () => {
     dispatch(fetchCards(offset, limit))
   }, [offset, limit, dispatch])
 
+  console.log('Render Home')
+
   if (!cardList || !cardList.length) {
     return <Loader />
   }
