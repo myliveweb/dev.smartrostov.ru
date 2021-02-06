@@ -4,5 +4,9 @@ import SliderInfo from '../components/SliderInfo'
 export const Gallery: React.FC = () => {
   console.log('Render Gallery')
 
-  return <SliderInfo />
+  return (
+    <div style={{ height: '700px' }}>
+      <SliderInfo />
+    </div>
+  )
 }
