@@ -44,7 +44,7 @@ export function hideSignUp() {
   }
 }
 
-export function setTopMenu(id: number) {
+export function setTopMenu(id: string | false) {
   return {
     type: MENU_VALUE,
     payload: id,

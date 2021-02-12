@@ -16,7 +16,7 @@ export interface RootState {
     loading: boolean
     signInPopUp: boolean
     signUpPopUp: boolean
-    manuValue: number
+    manuValue: string | boolean
   }
   auth: {
     user: {

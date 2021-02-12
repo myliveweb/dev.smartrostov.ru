@@ -109,6 +109,10 @@ const Header: React.FC = (props) => {
 
   const handleShow = () => dispatch(showSignIn())
 
+  const handleBack = () => {
+    history.goBack()
+  }
+
   const handleLogout = () => dispatch(logoutUser(userData.id, userData.token))
 
   return (
@@ -118,7 +122,7 @@ const Header: React.FC = (props) => {
       >
         <Toolbar className={classes.toolbar}>
           <Grid item xs={12} sm={6} md={4}>
-            <Button size="small" onClick={() => history.goBack()}>
+            <Button size="small" onClick={handleBack}>
               Назад
             </Button>
           </Grid>

@@ -12,7 +12,7 @@ const initialState = {
   loading: false,
   signInPopUp: false,
   signUpPopUp: false,
-  menuValue: 0,
+  menuValue: '',
 }
 
 export const appReducer: any = (
