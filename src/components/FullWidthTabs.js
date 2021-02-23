@@ -79,7 +79,7 @@ export default function FullWidthTabs() {
     dispatch(setTopMenu(curValue))
   }
 
-  console.log(value)
+  console.log(value, curValue)
 
   return (
     <div>

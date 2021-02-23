@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import CardMedia from '@material-ui/core/CardMedia'
+import parse from 'html-react-parser'
 
 const useStyles = makeStyles({
   root: {
@@ -25,6 +26,7 @@ const init = {
   id: 0,
   photo: '',
   name: '',
+  info_clean: '',
 }
 interface CardProps {
   match: {
@@ -73,6 +75,7 @@ const Card: React.FC<CardProps> = (props) => {
             </Grid>
             <Grid item xs={12} sm={6} md={8} style={{ padding: '15px' }}>
               <h2>{cardItem.name}</h2>
+              {parse(cardItem.info_clean)}
             </Grid>
           </Paper>
         )}
