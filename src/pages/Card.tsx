@@ -27,6 +27,7 @@ const init = {
   photo: '',
   name: '',
   info_clean: '',
+  info: [{ name: '', description: '' }],
 }
 interface CardProps {
   match: {
@@ -76,6 +77,12 @@ const Card: React.FC<CardProps> = (props) => {
             <Grid item xs={12} sm={6} md={8} style={{ padding: '15px' }}>
               <h2>{cardItem.name}</h2>
               {parse(cardItem.info_clean)}
+              <div style={{ marginTop: '15px' }} />
+              {cardItem.info.map((itemInfo) => (
+                <div>
+                  {itemInfo.name} - {itemInfo.description}
+                </div>
+              ))}
             </Grid>
           </Paper>
         )}
