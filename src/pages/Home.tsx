@@ -12,8 +12,8 @@ const Home: React.FC = () => {
 
   const cardList = useSelector((state: RootState) => state.card.cardList)
 
-  let offset = 0
-  let limit = 8
+  let offset = 20
+  let limit = 32
 
   React.useEffect(() => {
     dispatch(fetchCards(offset, limit))

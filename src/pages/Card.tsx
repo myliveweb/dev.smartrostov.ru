@@ -57,6 +57,8 @@ const Card: React.FC<CardProps> = (props) => {
 
   const classes = useStyles()
 
+  const fullPhoto = `/asset/img/basemor/${cardItem.photo}`
+
   return (
     <Box my={4} style={{ flexGrow: 1 }}>
       <Grid container>
@@ -65,7 +67,7 @@ const Card: React.FC<CardProps> = (props) => {
             <Grid item xs={12} sm={6} md={4} style={{ padding: '15px' }}>
               <CardMedia
                 className={classes.media}
-                image={cardItem.photo}
+                image={fullPhoto}
                 title={cardItem.name}
               />
             </Grid>
