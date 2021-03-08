@@ -5,6 +5,12 @@ import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import CardMedia from '@material-ui/core/CardMedia'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
 import parse from 'html-react-parser'
 
 const useStyles = makeStyles({
@@ -19,6 +25,10 @@ const useStyles = makeStyles({
     height: 0,
     paddingTop: '100%', // 16:9
     //paddingTop: '56.25%', // 16:9
+  },
+  table: {
+    minWidth: 320,
+    marginTop: 15,
   },
 })
 
@@ -77,12 +87,20 @@ const Card: React.FC<CardProps> = (props) => {
             <Grid item xs={12} sm={6} md={8} style={{ padding: '15px' }}>
               <h2>{cardItem.name}</h2>
               {parse(cardItem.info_clean)}
-              <div style={{ marginTop: '15px' }} />
-              {cardItem.info.map((itemInfo) => (
-                <div>
-                  {itemInfo.name} - {itemInfo.description}
-                </div>
-              ))}
+              <Table
+                className={classes.table}
+                size="small"
+                aria-label="a dense table"
+              >
+                <TableBody>
+                  {cardItem.info.map((row) => (
+                    <TableRow key={row.name}>
+                      <TableCell>{row.name}</TableCell>
+                      <TableCell>{row.description}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </Grid>
           </Paper>
         )}

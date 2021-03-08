@@ -26,6 +26,17 @@ import { deepPurple } from '@material-ui/core/colors'
 import FullWidthTabs from '../components/FullWidthTabs'
 
 const useStyles = makeStyles((theme: Theme) => ({
+  topbar: {
+    backgroundColor: '#fff',
+    maxWidth: '1232px',
+    right: '24px',
+    left: '24px',
+    width: 'auto',
+    margin: '0 auto',
+    ['@media (max-width:1024px)']: {
+      display: 'none',
+    },
+  },
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
     justifyContent: 'space-between',
@@ -117,9 +128,7 @@ const Header: React.FC = (props) => {
 
   return (
     <HideOnScroll {...props}>
-      <AppBar
-        style={{ backgroundColor: '#fff', maxWidth: '1232px', right: 'auto' }}
-      >
+      <AppBar className={classes.topbar}>
         <Toolbar className={classes.toolbar}>
           <Grid item xs={12} sm={6} md={4}>
             <Button size="small" onClick={handleBack}>
