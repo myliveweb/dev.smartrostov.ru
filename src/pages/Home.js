@@ -12,6 +12,8 @@ const Home = () => {
   const [fetching, setFetching] = useState(true)
   const limit = 32
 
+  console.log(fetching)
+
   useEffect(() => {
     if(fetching) {
       const data = {
