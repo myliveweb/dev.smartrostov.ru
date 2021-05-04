@@ -132,7 +132,7 @@ const Header: React.FC = (props) => {
         <Toolbar className={classes.toolbar}>
           <Grid item xs={12} sm={6} md={4}>
             <Button size="small" onClick={handleBack}>
-              Назад 2
+              Назад
             </Button>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
