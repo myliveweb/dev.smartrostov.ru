@@ -16,5 +16,21 @@ export interface RootState {
     loading: boolean
     signInPopUp: boolean
     signUpPopUp: boolean
+    manuValue: string | boolean
+  }
+  auth: {
+    user: {
+      auth: boolean
+      status: string
+      message: string
+      data: {
+        id: number
+        token: string
+        first_name: string
+        last_name: string
+        email: string
+        password: string
+      }
+    }
   }
 }

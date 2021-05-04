@@ -5,6 +5,13 @@ import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import CardMedia from '@material-ui/core/CardMedia'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import parse from 'html-react-parser'
 
 const useStyles = makeStyles({
   root: {
@@ -19,12 +26,18 @@ const useStyles = makeStyles({
     paddingTop: '100%', // 16:9
     //paddingTop: '56.25%', // 16:9
   },
+  table: {
+    minWidth: 320,
+    marginTop: 15,
+  },
 })
 
 const init = {
   id: 0,
   photo: '',
   name: '',
+  info_clean: '',
+  info: [{ name: '', description: '' }],
 }
 interface CardProps {
   match: {
@@ -57,6 +70,8 @@ const Card: React.FC<CardProps> = (props) => {
 
   const classes = useStyles()
 
+  const fullPhoto = `/asset/img/basemor/${cardItem.photo}`
+
   return (
     <Box my={4} style={{ flexGrow: 1 }}>
       <Grid container>
@@ -65,12 +80,27 @@ const Card: React.FC<CardProps> = (props) => {
             <Grid item xs={12} sm={6} md={4} style={{ padding: '15px' }}>
               <CardMedia
                 className={classes.media}
-                image={cardItem.photo}
+                image={fullPhoto}
                 title={cardItem.name}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={8} style={{ padding: '15px' }}>
               <h2>{cardItem.name}</h2>
+              {parse(cardItem.info_clean)}
+              <Table
+                className={classes.table}
+                size="small"
+                aria-label="a dense table"
+              >
+                <TableBody>
+                  {cardItem.info.map((row) => (
+                    <TableRow key={row.name}>
+                      <TableCell>{row.name}</TableCell>
+                      <TableCell>{row.description}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </Grid>
           </Paper>
         )}

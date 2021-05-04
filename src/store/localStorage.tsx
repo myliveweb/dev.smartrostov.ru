@@ -19,7 +19,12 @@ export const loadFromLocalStorage = () => {
     const json = JSON.parse(serialisedState)
     return {
       ...json,
-      app: { loading: false, signInPopUp: false, signUpPopUp: false },
+      app: {
+        loading: false,
+        signInPopUp: false,
+        signUpPopUp: false,
+        menuValue: json.app.menuValue,
+      },
     }
   } catch (e) {
     console.warn(e)

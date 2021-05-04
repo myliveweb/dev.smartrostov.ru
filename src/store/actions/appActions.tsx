@@ -5,6 +5,7 @@ import {
   HIDE_SIGN_IN,
   HIDE_SIGN_UP,
   SHOW_SIGN_UP,
+  MENU_VALUE,
 } from '../types'
 
 export function showLoader() {
@@ -40,5 +41,12 @@ export function showSignUp() {
 export function hideSignUp() {
   return {
     type: HIDE_SIGN_UP,
+  }
+}
+
+export function setTopMenu(id: string | false) {
+  return {
+    type: MENU_VALUE,
+    payload: id,
   }
 }
